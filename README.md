@@ -19,7 +19,7 @@ that fills them in.
 ```bash
 npm install
 cp .env.example .env.local   # then fill in your Supabase keys
-npm run dev                  # http://localhost:4000
+npm run dev                  # prints the URL it picked
 ```
 
 Without Supabase keys the app still runs — `/login` and `/signup` show a setup
@@ -30,15 +30,30 @@ notice instead of crashing, and route protection is inert.
 1. Create a project at [supabase.com](https://supabase.com).
 2. Copy **Project URL** and the **anon public** key from Project Settings → API into
    `.env.local`.
-3. Under Authentication → URL Configuration, add `http://localhost:4000/auth/callback`
-   (and your deployed equivalent) to the redirect allow-list, or magic links and
-   confirmation emails will bounce.
+3. Under Authentication → URL Configuration, add `http://localhost:3000/auth/callback`
+   (matching whatever port `npm run dev` printed) and your deployed equivalent to
+   the redirect allow-list, or magic links and confirmation emails will bounce.
+
+## If it won't start
+
+**`EADDRINUSE`** — something already holds the port. `npm run dev` picks the next
+free one on its own, so this only appears when you pin a port with `-p`. Drop the
+flag, or pick a different number.
+
+**Blank page or module errors** — the build cache and the installed tree have
+drifted apart. `rm -rf .next node_modules && npm install`.
+
+**`Unsupported engine` or a syntax error on start** — Next 16 needs Node 20.9 or
+newer. Check with `node -v`.
+
+**`/login` says "Connect Supabase"** — expected until `.env.local` exists. The rest
+of the app runs without it.
 
 ## Scripts
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Dev server |
+| `npm run dev` | Dev server. Starts on 3000, or the next free port if it's taken — read the URL it prints. Force one with `npm run dev -- -p 5173`. |
 | `npm run build` | Production build, including type checking |
 | `npm start` | Serve the production build |
 | `npm run lint` | ESLint |

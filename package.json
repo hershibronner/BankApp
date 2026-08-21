@@ -2,11 +2,14 @@
   "name": "moneytrack",
   "version": "0.1.0",
   "private": true,
-  "description": "MoneyTrack — see exactly where the extra money went, and what it's costing you.",
+  "description": "MoneyTrack \u2014 see exactly where the extra money went, and what it's costing you.",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
-    "dev": "next dev -p 4000",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 4000",
+    "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
