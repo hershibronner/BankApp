@@ -19,7 +19,7 @@ that fills them in.
 ```bash
 npm install
 cp .env.example .env.local   # then fill in your Supabase keys
-npm run dev                  # http://localhost:3000
+npm run dev                  # http://localhost:4000
 ```
 
 Without Supabase keys the app still runs — `/login` and `/signup` show a setup
@@ -30,7 +30,7 @@ notice instead of crashing, and route protection is inert.
 1. Create a project at [supabase.com](https://supabase.com).
 2. Copy **Project URL** and the **anon public** key from Project Settings → API into
    `.env.local`.
-3. Under Authentication → URL Configuration, add `http://localhost:3000/auth/callback`
+3. Under Authentication → URL Configuration, add `http://localhost:4000/auth/callback`
    (and your deployed equivalent) to the redirect allow-list, or magic links and
    confirmation emails will bounce.
 
