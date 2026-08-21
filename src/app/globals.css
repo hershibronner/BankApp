@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Dark is the default. Light is a token swap on the same variable names, so no
+ * component ever needs a `dark:` variant to pick a colour.
+ */
+:root,
+[data-theme='dark'] {
+  --canvas: #0b0c0e;
+  --surface: #141619;
+  --surface-hover: #1b1e22;
+  --border: #24282d;
+  --text: #ecedee;
+  --text-dim: #8a9096;
+  --text-faint: #565c63;
+  --accent: #7c7bff;
+  --accent-contrast: #0b0c0e;
+  --positive: #35d0a5;
+  --warn: #f0a93b;
+  --negative: #ef5b54;
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --canvas: #fafafa;
+  --surface: #ffffff;
+  --surface-hover: #f2f2f3;
+  --border: #e4e4e6;
+  --text: #16181b;
+  --text-dim: #63686e;
+  --text-faint: #9aa0a6;
+  --accent: #5b5aeb;
+  --accent-contrast: #ffffff;
+  --positive: #17936f;
+  --warn: #a8720d;
+  --negative: #c53a33;
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    @apply border-hairline;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-content font-sans antialiased;
+  }
+
+  /* Money and dates line up in columns only if the figures are tabular. */
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-canvas;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+}
+
+@layer components {
+  /* 12px mono, uppercase, wide — the section label used throughout the app. */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.08em] text-content-faint;
+  }
+
+  /* Elevation comes from a surface shift and a hairline, never a drop shadow. */
+  .panel {
+    @apply rounded-card border border-hairline bg-surface;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
